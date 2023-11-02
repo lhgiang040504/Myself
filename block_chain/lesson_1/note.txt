@@ -1,0 +1,22 @@
+Superior Digital Atore of Value
+
+Transaction : without centralized
+intermediary
+
+Etherium
+	decentralized agreement
+	decentralized organization
+
+remove centralized forces and counterparty risk
+
+Etherium vs Bitcoin : Bitcoin are intentionally touring incomplete. Bitcoin developers viewed Bitcoin as a store of value while Etherium developers viewed Etherium as both a store of value and utility to facilitate these decentralized agreement
+
+Blockchain cannot interact with real world data -> Oracle problem
+
+Oracle is a divice that delivers data to these decentralized blockchain
+
+on-chain logic need on-chain data
+
+Hybrid Smart Contracts : on-chain + off-chain Agreement
+
+chainlink : Decentralized oracle network -- both bring external data and external computation into our smart contract to sue decentralized end-to-end
