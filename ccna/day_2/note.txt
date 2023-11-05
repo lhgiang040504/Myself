@@ -1,0 +1,41 @@
+the only language that switch speak with is layer2
+
+ping with IP address, only sender know about receiver
+
+same IP network
+--
+source IP - sender
+destination IP - receiver
+source MAC - sender
+destination MAC - broadcast address
+--
+ * broadcast address send to everybody except sender
+--
+find MAC address that tied to receiver IP
+send needed frame
+--
+
+
+so what happend when we try to get to the outer network 
+
+--
+source IP - sender
+* destination IP - receiver IP  be transmitted to gateway of sender's IP network that used for router
+source MAC - sender
+destination MAC - broadcast address
+--
+
+case : switch connect directly to another switch
+-> be trying but wont get any respond
+
+case : switches are connected via router
+-> router use gateway address
+router help to connect between vary networks
+
+
+
+frame 2 layer
+packet 3 layer
+art packet
+ARP - Addressed Resolution Protocol
+ICMP - Internet Control Message Protocol
