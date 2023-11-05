@@ -1,0 +1,21 @@
+to know how switches are amazing, we need to look at their predecessor - hub , is disgusting, dumb and doesnt smart
+
+ping ip_address
+
+the job of the switch is learning where everyone is by learning mac address
+
+hub - sent the frame to every member of the network
+switch - sent to the correct one
+wireless access point (wap) - like a hub with cable is wave
+
+everything we know that have layer1, layer2, layer3 - main layers
+	layer1 - physical layer
+	layer2 - MAC address
+	layer3 - IP address
+
+MAC - Media Access Control
+CAM - Content Addressable Memory (table) == switch table
+	is used by a switch to discover the relationship between the layer2 of device and the physical port
+IP - Internet Protocol
+
+NIC - Network Interface Card
