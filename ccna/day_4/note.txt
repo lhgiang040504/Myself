@@ -1,0 +1,18 @@
+in layer4 : transport
+443 -> HTTPS
+80 -> HTTP
+TCP			UDP
+-reliable		-faster
+
+
+encapsulation process
+
+HTTPS because it's secure and encrypted
+
+| data |
+| data | l4 header | : segment
+| data | l4 header | l3 header | : packet
+| l2 trailer | data | l4 header | l3 header | l2 header | : frame
+
+
+at router change the l2 header and l2 reailer

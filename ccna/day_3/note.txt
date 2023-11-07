@@ -1,0 +1,11 @@
+1969 the birth of the internet (ARPANET - USDoD department of defense)
+TCP / IP model			OSI model (open systerms interconnection)
+- application			- application
+- transport			- presentation
+- network			- session
+- data link			- network
+- physical			- data link
+				- physical
+
+ list of rules or guidelines standards on how computer can communicate
+ make thing more digestible, easier to understand and implement
