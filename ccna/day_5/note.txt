@@ -1,0 +1,15 @@
+application : interface / portal for applications to communicate over a network
+
+presentation : data format (html, jpg, ..) and encryption (ssl secure socket layer)
+
+session :  popular protocol L2TP (layer 2 runneling protocol - VPN connection), RTCP (remote transport control protocol - help set up phone calls), H245 (set up video calls), SOCKS (bound to diffirent host to kind of muddy up who you are). Keep communication with server  smooth and when done, it tears down
+
+* synchronization
+transport : 
+	TCP - transimission control protocol: reliable - three-way handshake - 'need to know each other first before send data', the reason of reliable cause tcp is kind of naggy, have verification process. HTTP (hypertext transefer protocol), FTP (file transfer protocol), SMTP (simple mail transfer protocol), POP 3(post office protocol
+	UDP - user datagram protocol: fast - doesnt wait for verifiacation. DHCP (Dynamic Host Configuration Protocol) - assign IP address information to clients, SNMP (simple network management protocol), TFTP (trivial file transfer protocol), NTP (network time protocol), RADIUS.
+	
+
+	TCP is greate if it's used for most things that dont requre realtime interaction. UDP is used for quickly and fast. , 
+	Port number : each server has a ton of port, each port is used for particular purpose, corresponding each protocol (application layer) 
+	ephemeral port : from client, because may be client is running multiple tap
