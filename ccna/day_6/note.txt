@@ -1,0 +1,33 @@
+heart palpitations
+get risk of 'a single-point of failure' - expensive
+
+note both case cable and even switch/router go down
+
+multilayer switch (l3) IP and MAC address, stronger
+
+2-tier architecture
+	tier 2 	|  
+distributetion	|		multilayer swithch
+layer		|
+	tier 1  |	switch1		switch2		switch3
+access layer	|
+		|	device1.1	device2.1	device3.1
+
+
+distribution layer == aggregation layer == route filting == ... *== collapsed core layer
+
+add core layer to 3-tier architecture
+it comes in because of the problem that too mass of connect from vary number of architecture
+core layer : a beast switch that *beautiful powerful, low latency and high reliability
+
+3-tier architecture
+	tier 3	|
+core layer	|			beast switch
+		|
+	tier 2 	|  
+distributetion	|		M-swithch	M-switch
+layer		|
+	tier 1  |	switch1		switch2		switch3
+access layer	|
+		|	device1.1	device2.1	device3.1
+
