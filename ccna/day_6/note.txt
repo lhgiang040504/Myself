@@ -30,4 +30,5 @@ layer		|
 	tier 1  |	switch1		switch2		switch3
 access layer	|
 		|	device1.1	device2.1	device3.1
+___
 
