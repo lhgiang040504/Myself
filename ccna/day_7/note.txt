@@ -1,0 +1,59 @@
+a data center is all about server connecting to things and the internet
+
+big companies have their owned data center, so how about companies aren't big.The answer is yes but not all in the same way
+
+own data center doesn't always mean having a massive wahrehouse with ton of servers, may be it just be one room with one rack.
+
+
+own data center
+rent some rask space in a data center
+cloud - hybrid cloud
+
+old design:
+rack
+_
+tor switch - top of rack
+server1
+server2
+...
+_
+		core switch		: core layer
+	M-switch	M-switch	: distribution / aggregation layer
+rack		rack		rak	: access layer
+
+						core switch
+
+	M-switch	M-switch					M-switch	M-switch	
+
+rack		rack		rack				rack		rack		rack	
+
+
+we have a huge problem, it used to be north-south traffic. How about server want to talk to another server.
+
+this type of traffic was not important untill virtualization came in. With virtualization, the date center became more distributed, we call it is east-west traffic get 80% traffic with data center.
+The old wast too many hops to communication that nedds.
+
+Spanning tree, it'll shut down links (redundant links) and keep other one active avoiding switching loop so 3-tier design not for data centers.
+
+
+new design:
+rack:
+_
+leaf switch
+server1
+server2
+...
+_
+spine <- backbone
+spine/leaf design (clos)
+spine switch themself dont connect to each other
+
+		Spine switch		Spine switch		Spine switch
+	
+
+rack		rack		rack				rack		rack		rak	
+
+
+
+leaf switch connectd to spine switch is not layer2, it's layer3 ** why
+ton of above is underlay network
