@@ -17,3 +17,5 @@ Value :
 *Gas price : a unit of computational measurement, present how complex this transaction is, it can be extracted more clear when we break it down in the lowest level
 -> evm code or op codes
 transaction_fee = gas_price * gas_used
+
+The more people sened transactions at the same time the more expensive your gas costs are

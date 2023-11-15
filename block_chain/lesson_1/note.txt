@@ -26,3 +26,6 @@ L2 solve the scalability issuse
 	Zero Knowledge Rollups
 
 DAPP = Decentralized Application = Decentralized Protocol = Smart Contract
+
+Bitcoin = simple tx
+Etherium = Smart Contract
