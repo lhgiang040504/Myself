@@ -1,0 +1,35 @@
+Intro
+There are three different kinds of deployment models:
+
+Cloud-based
+	Everything runs in the cloud.
+	These are diffirent levels of services ranging from low to high.
+	The level of service has diffirent requirements on your management, architecting, and infrastructures.
+On-premises
+	Deploy resources by using virtualization and recource management tools, also is known as private cloud deployment.
+	Though this model is much loke legacy IT infrastructure, its application management and virtualization technologies make it more effective.
+Hybrid
+	You connect cloud recources to an on-premises infrastruture.
+	This approach is relevant in amny situations.
+
+Benefits:
+	Cost savings 
+	Security
+	Scalability
+	Flexibility
+Payment Model
+Fewer Operation
+Flexible Capacity
+Economies at Scale
+Inreaseed Speed
+Global Reach
+
+---
+AWS EC2 : Elastic Cloud Compute
+It makes the process of increasing and decreasing capacity easier.
+As a result, you can access the recource at demand.
+No upfront investment is needed
+You only pay for what you need and it is secure.
+
+Get started with AWS EC2  in three steps :
+Launch -> Connect -> Use

@@ -1,0 +1,9 @@
+AWS Fundamentals Specialization  https://imp.i384100.net/b3oM9M
+
+Create Virtual Machine EC2	https://imp.i384100.net/oeKJrE
+MySQL DB with AWS RDS		https://imp.i384100.net/P0DMNR
+Website Hosting and Replication	https://imp.i384100.net/ORxMmN
+Create Amazon Aurora DB		https://imp.i384100.net/Ry9M6g
+
+
+Learn Amazon Web Serviceshttps://www.w3schools.com/training/aws/home/
