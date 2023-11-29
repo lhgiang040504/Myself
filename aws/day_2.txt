@@ -1,0 +1,55 @@
+With AWS EC2 you pay for the compute time.
+Ypu only pay for the compute time that you use.
+It offers diffirent pricing options.
+
+- On Demand Instances are best used for short-term workloads.
+It requires no upfront costs or minimum amount the purchase.
+The instances run until you stop them.
+Ypu pay for what you use.
+
+- AWS EC2 Savings Plan is commitment for usage over a 1-year or 3-year term.
+Committing to a period gives a discounted price.
+If you surpass the budget, the cost goes to normal (on-demand) prices.
+
+- AWS Cost Explorer is a tool that helps to plan usage with AWS Cloud.
+
+- Reserved Instances are used to reserve instances for an agreed period.
+The option are for 1-year or 3-year. Tje latter one gives the highest discount.
+
+- Spot Instances are best for workload with flexible start and end times, wich can take interruptions. This pricing model can give up to a 90% cost savings.
+The reason behind the discount is that AWS can optimize its capacity, giving you better prices.
+
+-Dedicated Hosts are physical servers fully dedicated to you.
+You can use your existing VM sortware license.
+The Dedicated Host is the most expensive model.
+
+___
+
+AWS EC2 Scaling
+Scaling is about only using the resources that you need.
+In addtion, have the flexibility to grow freely.
+Make sure to have an architecture that can handle changes in demand.
+Designing a scalable architecture allow you to only pay for the resources that you need at any given time.
+
+AWS EC2 Auto Scaling
+Servers can get more request than they can handle.
+Too many request can cause timeouts and outages.
+AWS Auto Scaling allows you to add or remove EC@ instance automatically.
+It automates the capacity to the demand.
+There are two approaches:
+	Dynamic scaling: responds to changing demand.
+	Predictive scaling: schedules the number of instances based on a predicted demand.
+	Dynamic and Predictive scaling can be combined to scale faster.
+AWS EC@ Auto Scaling can be added as a buffer on top of your instances.
+It can add new instances to the applicaton when necessary and terminate them when no longer needed.
+You can setup a group of instances.
+Here you can set a minimum capacity of instances that will always be running. The rest will operate when necessary.
+
+You can set the desired number of AWS EC2 instances in the scaling group.
+However, the desired capacity defaults to your minimum capacity if not specified.
+The last configuration is Maximum capacity.
+Here you set the maximum capacity of instances to be used.
+
+
+
+
