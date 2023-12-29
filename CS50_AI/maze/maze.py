@@ -5,12 +5,15 @@ class Node():
         self.parent = parent
         self.action = action
 
+# DFS
 class StackFrontier():
     def __init__(self):
         self.frontier = []
+        self.newWalls = []
 
-    def add(self, node):
-        self.frontier.append(node)
+    def add(self, list_node):
+        for node in list_node:
+            self.frontier.append(node)
 
     def contains_state(self, state):
         return any(nodes.state == state for nodes in self.frontier)
@@ -26,7 +29,7 @@ class StackFrontier():
             self.frontier = self.frontier[:-1]
             return node 
         
-
+# BFS
 class QueueFrontier(StackFrontier):
     def remove(self):
         if self.empty():
@@ -35,7 +38,34 @@ class QueueFrontier(StackFrontier):
             node = self.frontier[0]
             self.frontier = self.frontier[1:]
             return node
+# G-BFS
+class Heuristic(QueueFrontier):
+    def Manhatan_Distance(self, walls, goal_point):
+        for i, row in enumerate(walls):
+            newRow = []
+            for j, element in enumerate(row):
+                if element is True:
+                    newRow.append(True, None)
+                elif (i, j) == goal_point:
+                    newRow.append(False, 0)
+                else:
+                    MD = abs(goal_point[0] - i) + abs(goal_point[1] - j)
+                    newRow.append(False, MD)
+            self.newWalls.append(newRow)
 
+    def add(self, list_node):
+        if len(list_node) == 1:
+            self.frontier.append(list_node[0])
+        else:
+            list_node = sorted(list_node, key=lambda x: self.newWalls[x.state[0]][x.state[1]][1])
+            for idx, node in enumerate(list_node):
+                if idx == 0:
+                    self.frontier.insert(0, node)
+                else:
+                    self.frontier.append(node)
+
+
+        
 
 class Maze():
     def __init__(self, filename):
@@ -111,10 +141,10 @@ class Maze():
 
         # All possible actions
         candidates = [
-            ((row, col - 1), 'L'),  # Left
-            ((row, col + 1), 'R'),  # Right
             ((row - 1, col), 'U'),  # Up
             ((row + 1, col), 'D'),  # Down
+            ((row, col + 1), 'R'),  # Right
+            ((row, col - 1), 'L'),  # Left
         ]
 
         # Ensure actions are valid
@@ -136,8 +166,8 @@ class Maze():
 
         # Initialize frontier to jusst the starting position
         start = Node(state=self.start, parent=None, action=None)
-        frontier = QueueFrontier()
-        frontier.add(start)
+        frontier = Heuristic()
+        frontier.add([start])
 
         # Initialize an empty explored set
         self.explored = set()
@@ -176,13 +206,14 @@ class Maze():
             self.explored.add(node.state)
 
             # Add neighbors to frontier
+            children = []
             for action, cell in self.neighbors(node.state):
                 child = Node(state=cell, parent=node, action=action)
                 if child.state not in self.explored and not frontier.contains_state(child.state):
-                    frontier.add(child)
-            
+                    children.append(child)
+            frontier.add(children)
 
-maze = Maze("maze/maze5.txt")
+maze = Maze("maze/maze4.txt")
 maze.solve()
 maze.print()
 print(maze.num_explored)
