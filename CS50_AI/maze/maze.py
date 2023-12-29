@@ -40,29 +40,36 @@ class QueueFrontier(StackFrontier):
             return node
 # G-BFS
 class Heuristic(QueueFrontier):
-    def Manhatan_Distance(self, walls, goal_point):
+    def Manhattan_Distance(self, walls, goal_point):
         for i, row in enumerate(walls):
             newRow = []
             for j, element in enumerate(row):
                 if element is True:
-                    newRow.append(True, None)
+                    newRow.append((True, None))
                 elif (i, j) == goal_point:
-                    newRow.append(False, 0)
+                    newRow.append((False, 0))
                 else:
                     MD = abs(goal_point[0] - i) + abs(goal_point[1] - j)
-                    newRow.append(False, MD)
+                    newRow.append((False, MD))
             self.newWalls.append(newRow)
 
     def add(self, list_node):
         if len(list_node) == 1:
             self.frontier.append(list_node[0])
         else:
-            list_node = sorted(list_node, key=lambda x: self.newWalls[x.state[0]][x.state[1]][1])
+            list_node = sorted(list_node, key=lambda x: self.get_distance(x))
             for idx, node in enumerate(list_node):
                 if idx == 0:
                     self.frontier.insert(0, node)
                 else:
                     self.frontier.append(node)
+    
+    def get_distance(self, node):
+        state = node.state
+        if state[0] < len(self.newWalls) and state[1] < len(self.newWalls[state[0]]):
+            return self.newWalls[state[0]][state[1]][1]
+        else:
+            return float('inf')
 
 
         
