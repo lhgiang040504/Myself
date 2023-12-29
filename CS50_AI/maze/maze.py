@@ -39,7 +39,7 @@ class QueueFrontier(StackFrontier):
             self.frontier = self.frontier[1:]
             return node
 # G-BFS
-class Heuristic(QueueFrontier):
+class Heuristic(StackFrontier):
     def Manhattan_Distance(self, walls, goal_point):
         for i, row in enumerate(walls):
             newRow = []
@@ -55,9 +55,9 @@ class Heuristic(QueueFrontier):
 
     def add(self, list_node):
         if len(list_node) == 1:
-            self.frontier.append(list_node[0])
+            self.frontier.insert(0, list_node[0])
         else:
-            list_node = sorted(list_node, key=lambda x: self.get_distance(x))
+            list_node = sorted(list_node, key=lambda x: self.get_distance(x), reverse=True)
             for idx, node in enumerate(list_node):
                 if idx == 0:
                     self.frontier.insert(0, node)
@@ -71,6 +71,13 @@ class Heuristic(QueueFrontier):
         else:
             return float('inf')
 
+    def remove(self):
+        if self.empty():
+            raise Exception("empty frontier")
+        else:
+            node = self.frontier[0]
+            self.frontier = self.frontier[1:]
+            return node
 
         
 
@@ -220,7 +227,7 @@ class Maze():
                     children.append(child)
             frontier.add(children)
 
-maze = Maze("maze/maze4.txt")
+maze = Maze("maze/maze2.txt")
 maze.solve()
 maze.print()
 print(maze.num_explored)
