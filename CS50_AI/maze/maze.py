@@ -39,7 +39,18 @@ class QueueFrontier(StackFrontier):
             self.frontier = self.frontier[1:]
             return node
 # G-BFS
-class Heuristic(StackFrontier):
+class Heuristic():
+    def __init__(self, walls, goal):
+        self.frontier = []
+        self.newWalls = []
+        self.Manhattan_Distance(walls, goal)
+
+    def contains_state(self, state):
+        return any(nodes.state == state for nodes in self.frontier)
+    
+    def empty(self):
+        return len(self.frontier) == 0
+
     def Manhattan_Distance(self, walls, goal_point):
         for i, row in enumerate(walls):
             newRow = []
@@ -57,13 +68,9 @@ class Heuristic(StackFrontier):
         if len(list_node) == 1:
             self.frontier.insert(0, list_node[0])
         else:
-            list_node = sorted(list_node, key=lambda x: self.get_distance(x), reverse=True)
-            for idx, node in enumerate(list_node):
-                if idx == 0:
-                    self.frontier.insert(0, node)
-                else:
-                    self.frontier.append(node)
-    
+            list_node = sorted(list_node, key=lambda x: self.get_distance(x))
+            self.frontier[0:0] = list_node
+        
     def get_distance(self, node):
         state = node.state
         if state[0] < len(self.newWalls) and state[1] < len(self.newWalls[state[0]]):
@@ -79,10 +86,8 @@ class Heuristic(StackFrontier):
             self.frontier = self.frontier[1:]
             return node
 
-        
-
 class Maze():
-    def __init__(self, filename):
+    def __init__(self, filename, type):
         """
         self.start
         self.end
@@ -91,6 +96,7 @@ class Maze():
         self.walls
         self.solution
         """
+        self.type = type
 
         # Read file and set height and width of maze
         with open(filename) as f:
@@ -148,17 +154,17 @@ class Maze():
                 else:
                     print("  ", end="")
             print()
-        print()
+        #print()
         
     def neighbors(self, state):
         row, col = state
 
         # All possible actions
         candidates = [
-            ((row - 1, col), 'U'),  # Up
-            ((row + 1, col), 'D'),  # Down
             ((row, col + 1), 'R'),  # Right
             ((row, col - 1), 'L'),  # Left
+            ((row - 1, col), 'U'),  # Up
+            ((row + 1, col), 'D'),  # Down
         ]
 
         # Ensure actions are valid
@@ -180,7 +186,13 @@ class Maze():
 
         # Initialize frontier to jusst the starting position
         start = Node(state=self.start, parent=None, action=None)
-        frontier = Heuristic()
+        if self.type == "DFS":
+            frontier = StackFrontier()
+        elif self.type == "BFS":
+            frontier = QueueFrontier()
+        else:
+            frontier = Heuristic(self.walls, self.goal)
+        
         frontier.add([start])
 
         # Initialize an empty explored set
@@ -227,8 +239,24 @@ class Maze():
                     children.append(child)
             frontier.add(children)
 
-maze = Maze("maze/maze2.txt")
-maze.solve()
-maze.print()
-print(maze.num_explored)
+
+mazeDFS = Maze("maze/maze4.txt", 'DFS')
+mazeBFS = Maze("maze/maze4.txt", 'BFS')
+mazeGBFS = Maze("maze/maze4.txt", 'G-BFS')
+
+mazeDFS.solve()
+mazeBFS.solve()
+mazeGBFS.solve()
+
+mazeDFS.print()
+print(mazeDFS.num_explored)
+print()
+mazeBFS.print()
+print(mazeBFS.num_explored)
+print()
+mazeGBFS.print()
+print(mazeGBFS.num_explored)
+print()
+
+
 
