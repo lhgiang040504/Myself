@@ -38,6 +38,7 @@ class QueueFrontier(StackFrontier):
             node = self.frontier[0]
             self.frontier = self.frontier[1:]
             return node
+        
 # G-BFS
 class Heuristic():
     def __init__(self, walls, goal):
@@ -85,7 +86,36 @@ class Heuristic():
             node = self.frontier[0]
             self.frontier = self.frontier[1:]
             return node
+        
+# A*
+class A_star(Heuristic):
+    def __init__(self, walls, goal):
+        self.potential_node = {}
+        # State method
+        self._step = -1
+        self.frontier = []
+        self.newWalls = []
+        self.Manhattan_Distance(walls, goal)
 
+    def add(self, list_node):
+        for node in list_node:
+            self.potential_node[node] = (self._step, self.newWalls[node.state[0]][node.state[1]][1])
+        
+        minimumNode = min(self.potential_node, key=lambda k: self.potential_node[k][1] + self.potential_node[k][0])
+        self._step = self.potential_node[minimumNode][0]
+        del self.potential_node[minimumNode]
+        self.frontier.insert(0, minimumNode)
+        
+
+    def remove(self):
+        if self.empty():
+            raise Exception("empty frontier")
+        else:
+            self._step += 1
+            node = self.frontier[0]
+            self.frontier = self.frontier[1:]
+            return node
+        
 class Maze():
     def __init__(self, filename, type):
         """
@@ -190,8 +220,10 @@ class Maze():
             frontier = StackFrontier()
         elif self.type == "BFS":
             frontier = QueueFrontier()
-        else:
+        elif self.type == "G-BFS":
             frontier = Heuristic(self.walls, self.goal)
+        else:
+            frontier = A_star(self.walls, self.goal)
         
         frontier.add([start])
 
@@ -240,22 +272,12 @@ class Maze():
             frontier.add(children)
 
 
-mazeDFS = Maze("maze/maze4.txt", 'DFS')
-mazeBFS = Maze("maze/maze4.txt", 'BFS')
-mazeGBFS = Maze("maze/maze4.txt", 'G-BFS')
+maze = Maze("maze/maze5.txt", 'A*')
 
-mazeDFS.solve()
-mazeBFS.solve()
-mazeGBFS.solve()
+maze.solve()
 
-mazeDFS.print()
-print(mazeDFS.num_explored)
-print()
-mazeBFS.print()
-print(mazeBFS.num_explored)
-print()
-mazeGBFS.print()
-print(mazeGBFS.num_explored)
+maze.print()
+print(maze.num_explored)
 print()
 
 
