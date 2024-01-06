@@ -59,10 +59,74 @@
     Search strategy that uses problem-specific knowledge to find solutions more efficient.
     - GREEDY BEST-FIRST SEARCH (G-BFS): Search algorith that expands the node that is closest to the goal, as estimated by a heuristic function h(n).
     Manhatan distance
-    - A* search
-    
+    - A* search: optimal if :
+        - h(n) is admissible (never overestimates the true cost)
+        - h(n) is consistent (for every node n and successor n' with step cost c, h(n) <= h(n') + c)
+## Adversarial Search
+* MiniMax
+    X win : 1
+    O win : -1
+    nobody win : 0
+    MAX (X) aim to maximize score
+    MIN (O) aim to minimize score
+
+    Given a state s:
+        MAX picks action a in ACTIONS(s) that produces hightest value of Min-Value(result(s, a))
+
+        MIN picks action a in ACTIONS(s) that produces smallest value of MAX-VALUE(result(s, a))
+* Opimal - Alpha Beta Pruning
+* Depth-Limited Minimax
+* Additional Feature - evaluation function
 
 # KNOWLEDGE
+## knowledge-based agents
+    agents that reason by operating on internal representations of knowledgeff
+## sentence
+    an assertion about the world in a knowledge represenetation language
+## Propositional Logic
+    Logical Connective : not, and, or, implication, bicondition
+- not
+|     a    |   not(a) |
+|----------|----------|
+| true     | false    |
+| false    | true     |
+
+- and
+| a and b  | true     | false    |
+|----------|----------|----------|
+| true     | true     | false    |
+| false    | false    | false    |
+
+- or
+| a or b   | true     | false    |
+|----------|----------|----------|
+| true     | true     | true     |
+| false    | true     | false    |
+
+- implication
+| a -> b   | true     | false    |
+|----------|----------|----------|
+| true     | true     | false    |
+| false    | true     | true     |
+
+- bicondition
+| a <=> b  | true     | false    |
+|----------|----------|----------|
+| true     | true     | false    |
+| false    | false    | true     |
+## model
+    assignment of a truth value to every propositional symbol (a "possible world")
+## knowledge base
+    a set of sentence known by a knowledge-based agent
+    EfNTAILMENT
+## inference
+    inference algorithm
+## Model Checking
+    To determine if KB entail alpha:
+    1. Enumerate all possible models.
+    2. If in every model where KB is true, alpha is also true, reference KB entail alpha.
+    3. Ohterwise, KB does not entail alpha
+
 # UNCERTAINTY
 # OPTIMIZATION
 # LEARNING

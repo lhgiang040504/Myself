@@ -106,7 +106,6 @@ class A_star(Heuristic):
         del self.potential_node[minimumNode]
         self.frontier.insert(0, minimumNode)
         
-
     def remove(self):
         if self.empty():
             raise Exception("empty frontier")
@@ -272,7 +271,7 @@ class Maze():
             frontier.add(children)
 
 
-maze = Maze("maze/maze5.txt", 'A*')
+maze = Maze("maze/maze5.txt", 'DFS')
 
 maze.solve()
 
