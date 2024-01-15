@@ -78,6 +78,8 @@
 * Depth-Limited Minimax
 * Additional Feature - evaluation function
 
+----------------------------------------
+
 # KNOWLEDGE
 ## knowledge-based agents
     agents that reason by operating on internal representations of knowledgeff
@@ -179,7 +181,6 @@
     P(a|b) = [P(a and b)] / P(b)
     P(a|Not(b)) = [P(a and Not(b))] / P(Not(b))
     Sum that
-## Markov Chains
 ## Bayesian Network
 A graphical representation of set of variables and their conditional dependencies.
 ## inference - inference by enumurations
@@ -196,8 +197,33 @@ some (or none) of the other variables.
 - Sampling: Rejection Sampling
 - Likelihood Weighting
 ## Uncertainty over Time
+- Markov assumption: the assumption that the current state depends on only a finite fixed number of previous state
+- Markov Chain: a sequence of random variables where the distribution of each variable follows the Markov assumption
+- Transition model
+- Hidden Markov Model: a Markov model for a system with hidden states that generate some observered event
+- sensor Markov assumption: the assumption that the evidence variable depends only the corresponding state
+- filtering, prediction, smoothing, most likely explanation
+
+----------------------------------------
 
 # OPTIMIZATION
+Choosing the best option from a set of options
+## local search
+search algorithms that maintain a single node and searches by movign to a neighboring node
+## state-space landscape
+- global maximum: objective function
+- global minimum: cost function
+- local maxima
+- local minima
+- plataus (flat local maximum, flat local minimum, shoulder)
+- Hill Climbing algorithm:
+    * Variant   Definition
+    * steepest-ascent   choose the highest-valued neighbor
+    * stochastic    choose randomly from highe-valued neighbors
+    * first-choice  choose the first higher-valued neighbor
+    * random-restart    conduct hill climbng multiple times
+    * local beam search    chooses the k highest-valued neighbors
+
 # LEARNING
 # NEURAL NETWORKS
 # LANGUAGE
