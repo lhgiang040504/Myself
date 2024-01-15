@@ -192,7 +192,10 @@ Each row represents an outcome of a parent variable, and each column represents 
 A table used to describe the joint probability distribution over a set of variables, given the values of
 some (or none) of the other variables.
 ## Kernel - smoothing function
-
+## Approximate Inference
+- Sampling: Rejection Sampling
+- Likelihood Weighting
+## Uncertainty over Time
 
 # OPTIMIZATION
 # LEARNING
