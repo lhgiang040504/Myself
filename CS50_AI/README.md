@@ -223,6 +223,54 @@ search algorithms that maintain a single node and searches by movign to a neighb
     * first-choice  choose the first higher-valued neighbor
     * random-restart    conduct hill climbng multiple times
     * local beam search    chooses the k highest-valued neighbors
+## Simulated Annealing
+- The problem is that we only steping forward to the better state, but sometime we want the contrary one. Beacuse when to got local max/min state, we need to dislodging ourselves for getting the target - global.
+    - Early on, higher "temperature": more likely accept neighbors that are worse than current state
+    - Later on, lower "temperature": less likely to accept neighbor that are worse than current state
+## Linear Programming
+- Minimize a cost functtion 
+- With constraints of form <= bound
+- With bound for each variable
+
+- Type:
+    - Simplex
+    - Interior-Point
+## Constraint Satisfaction
+- Set of variables {X1, X2, X3, ..., Xn}
+- Set of domains for each variable {D1, D2, D3, ..., Dn}
+- Set of constrants C
+ 
+- Constraint graph
+- Different Forms
+    + hard constraints: constraints that must be satisfied in a correct solution
+    + soft constraints: constraints that express some notion of which solutions are preferred over others
+- Categoties constraint problem
+    + unary constraint: constraint involving only one variable {A >< Monday}
+    + binary constraint: constraint involving two variables {A >< B}
+- Consistency
+    + node consistency: when all the values in a variable's domain satisfy the variable'unary constraints
+    + arc consistency: when all the values in a variable's domain satisfy the variable's binary constraints
+    To make X arc-consistency with respect to Y, remove elemenets from X's domain until every choice for X has a possible choice for Y
+- CSPs as Search Problems:
+    - initial state: empty assignment (no varables)
+    - actions: add a {variable = value} to assignment
+    transition model: shows how to adding assignment changes the assignment
+    goal test: check if all variable assigned and constraints all satisfied
+    path cost function: all paths have same cost
+
+    - algorithm: Backtracking Search
+    function BACKTRACK(assignment, csp):
+        if assignment complete: return assignment
+        var = SELECT-UNASSIGNMENT-VAR(assignment, csp)
+        for value in DOMAIN-VALUES(var assignment, csp):
+            if value consistent with assignment:
+                add {var=value} to assignment
+                result = BACKTRACK(assignment, csp)
+                if result >< failure:   
+                    return result
+            remove {var=value} from assignment
+        return failure
+
 
 # LEARNING
 # NEURAL NETWORKS
