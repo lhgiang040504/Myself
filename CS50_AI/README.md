@@ -270,7 +270,10 @@ search algorithms that maintain a single node and searches by movign to a neighb
                     return result
             remove {var=value} from assignment
         return failure
-
+# inference
+- maintaining arc-consistency: 
+    algorithm for enforving arc-consistency every time we make a neww assignment
+    when we make a new assignment to X, calls AC-3, starting with a queue of all arcs (Y, X) where Y is a neighbor of X
 
 # LEARNING
 # NEURAL NETWORKS
