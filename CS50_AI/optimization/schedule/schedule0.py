@@ -1,6 +1,7 @@
 """
 Naive backtracking search without any heristics or inference.
 """
+import random
 
 VARIABLE = ["A", "B", "C", "E", "F", "G"]
 CONSTRAINTS = [
@@ -16,17 +17,24 @@ CONSTRAINTS = [
     ("E", "G"),
     ("F", "G")
 ]
+RESULT = []
 
 def backtrack(assignment):
     """Runs backtracking search to find an assignment."""
 
     # Check if assignment is complete
     if len(assignment) == len(VARIABLE):
-        return assignment
+        if assignment not in RESULT:
+            RESULT.append(assignment)
+            return assignment
+        return False
     
     # Try a new variable
     var = select_unassigned_variable(assignment)
-    for value in ["Monday", "Tuesday", "Wednesday"]:
+    
+    values = ["Monday", "Tuesday", "Wednesday"]
+    random.shuffle(values)
+    for value in values:
         new_assignment = assignment.copy()
         new_assignment[var] = value
         if consistent(new_assignment):
@@ -56,6 +64,6 @@ def consistent(assignment):
         
     # If nothing inconsistent, then assignment is consistent
     return True
-
-solution = backtrack(dict())
-print(solution)
+for _ in range(10):
+    solution = backtrack(dict())
+    print(solution)
