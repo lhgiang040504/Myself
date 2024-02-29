@@ -20,7 +20,7 @@ def solve(matrix, lst):
 
 matrix = []
 for _ in range(3):
-    row = input("Nhập dòng {}: ".format(_ + 1)).split()
+    row = input().split()
     matrix.append(row)
 
 lst = []
