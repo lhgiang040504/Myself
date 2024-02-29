@@ -6,7 +6,7 @@ matrix = []
 
 # Input matrix
 for _ in range(H):
-    row = input("Nhập dòng {}: ".format(_ + 1))
+    row = input()
     matrix.append(row)
 TOTAL = sum(row.count('#') for row in matrix)
 
