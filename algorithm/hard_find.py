@@ -6,14 +6,13 @@ all_inputs = ['7',
 '8 1 0 8 3 16']
 
 lst = all_inputs[1].split(" ")
-#lst = lst[::-1]
+lst = lst[::-1]
 
 check_lst = all_inputs[3].split(" ")
-#result = [-1] * len(check_lst)
 
 positions = {}
 for i, num in enumerate(lst):
-    positions[num] = i
+    positions[num] = len(lst) - i - 1
 
 result = []
 for num in check_lst:
