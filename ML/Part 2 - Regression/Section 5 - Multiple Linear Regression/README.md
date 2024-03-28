@@ -67,6 +67,6 @@
          
 ## Scaling
     In multiple Linear Regression, the coefficients will compensate to put everything to scale - no need to apply Scaling
-## Do we need to check assumptions ?
+## Do we need to check assumptions and dummy variables ?
 
         
