@@ -9,10 +9,12 @@ def sol(storage):
     storage.sort()
     for i in range(len(storage)):
         if i + 1 > storage[i][0]:
-            print(-1)
-            return
-        
-    for drone in storage:
-        print(drone[1], end=" ")
+            return False
+    return True
+    
 
-sol(storage)
+if sol(storage):
+    for i in range(len(storage)):
+        print(storage[i][1], end=" ")
+else:
+    print(-1)
