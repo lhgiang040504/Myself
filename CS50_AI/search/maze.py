@@ -271,7 +271,7 @@ class Maze():
             frontier.add(children)
 
 
-maze = Maze("maze/maze5.txt", 'DFS')
+maze = Maze("maze5.txt", 'A*')
 
 maze.solve()
 

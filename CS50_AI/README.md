@@ -270,11 +270,21 @@ search algorithms that maintain a single node and searches by movign to a neighb
                     return result
             remove {var=value} from assignment
         return failure
-# inference
+## inference
+interleaving search process and inference
 - maintaining arc-consistency: 
     algorithm for enforving arc-consistency every time we make a neww assignment
     when we make a new assignment to X, calls AC-3, starting with a queue of all arcs (Y, X) where Y is a neighbor of X
+********
+
+
 
 # LEARNING
+## Supervised Learning
+given a data set of input-output pairs, learn a function to map inputs to outputs
+*a human has gone in and labeled each of these date points*
+### classification
+supervised learning task of task a function mapping an input point to a discrete category 
+- nearesr-neighbor classification: algorithm that given an input, chooses the class of the nearest data point to that input => k-nearest-neighbor classification
 # NEURAL NETWORKS
 # LANGUAGE

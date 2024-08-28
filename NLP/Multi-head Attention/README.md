@@ -1,10 +1,10 @@
 4.1 MHA mechanism (Multi-head Attention):
 
-4.1.0 Input: 
+    4.1.0 Input: 
 Computer dont understand natural language, the only language they understand is that matrices and numbers.
 With a line of code, we assign a numeric index to each vocab.
 Denote by x 
-4.1.1 Input Embedding
+    4.1.1 Input Embedding
 Against each of those indices, a vector is attached. Initially, these vector are filled up with random number. Later on, during trainning phase, the model update them with value that better. (the original Transformer went with embedding size of 512) Vector representation of a given word, each dimension of the vector tries to capture some linguistic feature about that vocab.
 Linguistic feature: It can be non-trival to find out exactly what information do each of these dimensions represent.
 If two vocab have the same linguistic features, during training process, they will get closer and closer in linguistic feature hyper dimension graph.
@@ -30,7 +30,7 @@ The author came up with the clever idea, they used wave frequencies to capture p
 			The problem when build this method is that what happen went we get same of height of sinusoidal curve of two points with different position index, use index of each dimension so having curve of each frequency..
 			The idea behind having that is at each frequency, two random point will allway remain identity, but the height is not same with all of frequencies.
 			Use a alternative combination of sin and cousin formular.
-4.1.3 MHA mechanism(Multi-head Attention):
+    4.1.3 MHA mechanism(Multi-head Attention):
 Attention Mechanism help the model to focus in important vocab in give input and they use self-attention.
 Simple-attention vs self-sttention:
 SimpleA: attention vicab respective.
@@ -57,4 +57,10 @@ Concatenate and Last Linear: All of our head will be attached in this step and w
 	4.1.4 Why? What the point of all of this?
 They filt out the unnecessary background information and zoom in to focus on what truly matter in that moment
 Each head focusing different linguistic feature.
+
+source
+https://peterbloem.nl/blog/transformers
+https://arxiv.org/abs/1706.03762
+
+
 
