@@ -1,2 +1,3 @@
 strftime.org
-spacy.io/api/anotation
+spacy.io/api/annotation
+nlp.stanford.edu/software
