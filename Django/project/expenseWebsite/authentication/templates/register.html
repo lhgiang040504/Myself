@@ -12,7 +12,9 @@
           <h4>Register to your account</h4>
         </div>
 
-        <form action="" method="post">
+        <form action="{% url 'register' %}" method="post">
+          {% csrf_token %}
+          {% include 'partials/error_message.html' %}
             <div class="form-group">
               <input
                 type="text"
@@ -20,6 +22,7 @@
                 placeholder="username"
                 id="usernameField"
                 class="form-control form-control-sm"
+                value="{{fieldValues.username}}"
               />
             </div>
             
@@ -33,6 +36,7 @@
                 placeholder="Email"
                 class="form-control form-control-sm"
                 id="emailField"
+                value="{{fieldValues.email}}"
               />
             </div>
 
@@ -47,7 +51,6 @@
                 class="form-control form-control-sm"
                 id="passwordField"
               />
-              <small class="float-right py-2 showPasswordToggle">SHOW</small>
             </div>
             
             <input type="submit" value="Register" class="btn btn-block btn-primary submit-btn" />
