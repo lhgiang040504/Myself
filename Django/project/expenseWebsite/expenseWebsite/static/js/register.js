@@ -1,5 +1,31 @@
 const usernameField = document.querySelector('#usernameField');
+const emailField = document.querySelector('#emailField');
+
 const feedBackArea = document.querySelector('.invalid_feedback');
+const emailFeedBackArea = document.querySelector('.emailFeedBackArea');
+
+emailField.addEventListener("keyup", (e) => {
+  const emailVal = e.target.value;
+
+  emailField.classList.remove("is-invalid");
+  emailFeedBackArea.style.display = "none";
+
+  if (emailVal.length > 0) {
+      fetch("/authentication/email_validation", {
+          body: JSON.stringify({ email: emailVal }),
+          method: "POST",
+      })
+      .then(res => res.json())
+      .then((data) => {     
+        if (data.email_error) {
+            emailField.classList.add("is-invalid");
+            emailFeedBackArea.style.display = "block";
+            emailFeedBackArea.innerHTML = `<p>${data.email_error}</p>`;
+            submitBtn.disabled = true;
+        }
+      });
+  }
+});
 
 usernameField.addEventListener("keyup", (e) => {
     const usernameVal = e.target.value;
@@ -14,12 +40,12 @@ usernameField.addEventListener("keyup", (e) => {
         })
         .then(res => res.json())
         .then((data) => {     
-            if (data.username_error) {
-                usernameField.classList.add("is-invalid");
-                feedBackArea.style.display = "block";
-                feedBackArea.innerHTML = `<p>${data.username_error}</p>`;
-                submitBtn.disabled = true;
-            }
+          if (data.username_error) {
+              usernameField.classList.add("is-invalid");
+              feedBackArea.style.display = "block";
+              feedBackArea.innerHTML = `<p>${data.username_error}</p>`;
+              submitBtn.disabled = true;
+          }
         });
     }
 });
