@@ -12,12 +12,10 @@ class RegistrationView(View):
 class UsernameValidationView(View):
     def post(self, request):
         data = json.loads(request.body)
-
         username = data['username']
         if not str(username).isalnum():
-            return JsonResponse({'username_error': 'username should only contain alphanumeric characters'})
-        if User.objects.filter(username==username).exists():
-            return JsonResponse({'username_error': 'username has already existed, choose another one'})
-        
+            return JsonResponse({'username_error': 'username should only contain alphanumeric characters'}, status=400)
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({'username_error': 'sorry username in use,choose another one '}, status=409)
         return JsonResponse({'username_valid': True})
     
