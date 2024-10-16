@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 import json
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from validate_email import validate_email
 from django.contrib import messages
+from django.contrib import auth
 # Create your views here.
 
 class RegistrationView(View):
@@ -32,11 +33,10 @@ class RegistrationView(View):
 
                 user = User.objects.create_user(username=username, email=email)
                 user.set_password(password)
-                user.is_active = False
+                user.is_active = True
                 user.save()
-                
                 messages.success(request, 'Account successfully created')
-                return render(request, 'register.html')
+                return render(request, 'login.html')
 
         return render(request, 'register.html')
 
@@ -60,3 +60,32 @@ class EmailValidationView(View):
         if User.objects.filter(email=email).exists():
             return JsonResponse({'email_error': 'sorry email in use,choose another one '}, status=409)
         return JsonResponse({'email_valid': True})
+    
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'login.html')
+
+    def post(self, request):
+        data = request.POST
+        username = data['username']
+        password = data['password']
+
+        if username and password:
+            user = auth.authenticate(username=username, password=password)
+
+            if user:
+                auth.login(request, user)
+                messages.success(request, 'Welcome ' + user.username)
+                return redirect('index')
+
+            messages.error(request, 'Invalid credentials')
+            return render(request, 'login.html')
+        
+        messages.error(request, 'Please fill all fields')
+        return render(request, 'login.html')
+    
+class LogoutView(View):
+    def post(self, request):
+        auth.logout(request)
+        messages.success(request, 'You have been logged out')
+        return redirect('login')
