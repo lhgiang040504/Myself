@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from core.models import CO2
 import plotly.express as px
+from django.db.models import Avg, Case, Count, F, Max, Min, Prefetch, Q, Sum, When
 
 from core.forms import DateForm
 # Create your views here.
@@ -28,4 +29,25 @@ def chart(request):
     context= {'chart_plot': chart,
               'form': DateForm(),}
 
+    return render(request, 'core/chart.html', context)
+
+def yearly_avg_co2(request):
+    averages = CO2.objects.values('date__year').annotate(avg=Avg('average'))
+    x = averages.values_list('date__year', flat=True)
+    y = averages.values_list('avg', flat=True)
+
+    fig = px.bar(
+        x=x,
+        y=y,
+    )
+    fig.update_layout(
+        title='Yearly Average CO2',
+        
+    )
+
+    bar_chart = fig.to_html()
+    context= {
+        'bar_chart': bar_chart,
+        'form': DateForm(),
+    }
     return render(request, 'core/chart.html', context)

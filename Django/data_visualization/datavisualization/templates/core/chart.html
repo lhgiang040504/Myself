@@ -1,11 +1,11 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<form method='GET' action="{% url 'chart_plot' %}">
+<form method='GET' action="{% url 'bar_chart' %}">
     {{form.as_p}}
     <button>Sumit</button>
 </form>
 
 
-{{ chart_plot|safe }}
+{{ bar_chart|safe }}
 {% endblock %}
