@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from core.models import PersonSalary
 import plotly.express as px
-from django.db.models import Case, When, Value, CharField
+from django.db.models import Case, When, Value, CharField, Avg
 
 # Create your views here.
 def plot(request):
@@ -14,12 +14,12 @@ def plot(request):
     conditionals = [When(age__range=bin, then=Value(f'{bin}')) for bin in age_bins]
 
     case = Case(*conditionals, output_field=CharField())
-    age_groupings = person_salaries.annotate(age_group=case).values('age_group').order_by('age_group')
+    age_groupings = person_salaries.annotate(age_group=case).values('age_group').order_by('age_group').annotate(avg=Avg('salary'))
 
     age_groups = age_groupings.values_list('age_group', flat=True)
-    salaries = age_groupings.values_list('salary', flat=True)
+    salaries = age_groupings.values_list('avg', flat=True)
 
-    fig = px.box(x=age_groups, y=salaries, title='Salary by Age', height=800)
+    fig = px.line(x=age_groups, y=salaries, title='Salary by Age', height=800)
     html = fig.to_html()
 
     context = {
