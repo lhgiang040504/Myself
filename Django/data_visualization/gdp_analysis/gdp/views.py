@@ -41,3 +41,29 @@ def index(request):
     if request.htmx:
         return render(request, 'partials/gdp-bar.html', context)
     return render(request, 'index.html', context)
+
+def line(request):
+    countries = GDP.objects.values_list('country', flat=True).distinct()
+
+    country = request.GET.get('country', 'Germany')
+    gdps = GDP.objects.filter(country=country).order_by('year')
+
+    country_years = [d.year for d in gdps]
+    country_gdps = [d.gdp for d in gdps]
+    cds = ColumnDataSource(data=dict(country_years=country_years, country_gdps=country_gdps))
+
+    fig = figure(height=500, title=f'{country} GDP over years')
+    fig.title.align = 'center'
+    fig.title.text_font_size = '1.5em'
+    fig.yaxis[0].formatter = NumeralTickFormatter(format='$0.0a')
+
+    fig.line(x='country_years', y='country_gdps', source=cds, width=2)
+    script, div = components(fig)
+
+    context = {
+        'div': div,
+        'script': script,
+        'countries': countries,
+        'country_selected': country
+    }
+    return render(request, 'line.html', context)

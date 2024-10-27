@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p class="lead">GDP by country</p>
+<div class="row">
+    <div class="col-10" id="'barchart">
+        {% include 'partials/gdp-bar.html' %}
+    </div>
+    <div class="col-2">
+        <label>Year</label>
+        <select name="country" 
+                id="select_year" 
+                class="custom-select" 
+                autocomplete="off" 
+                hx-get="{% url 'line' %}"
+                hx-target="#barchart">
+            {% for country in countries %}
+                <option value="{{ country }}" {% if country_selected == country %} selected {% endif %}>{{ country }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+{% endblock %}
