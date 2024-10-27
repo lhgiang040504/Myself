@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p class="lead">GDP by country</p>
+<di class="row">
+    <div class="col-10" id="'barchart">
+        {% include 'partials/gdp-bar.html' %}
+    </div>
+    <div class="col-2">
+        <form>
+            <select name="year" 
+                    id="select_year" 
+                    class="custom-select" 
+                    autocomplete="off" 
+                    hx-get="{% url 'index' %}"
+                    hx-target="#barchart">
+                {% for year in years %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
+            <input type="number" name="count" id="count" autocomplete="off" value="{{ count }}">
+        </form>
+    </div>
+</div>
+{% endblock %}
