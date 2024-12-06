@@ -1,3 +1,4 @@
 bitsandbytes
 accelerate
 langchain-community
+langchain-openai
