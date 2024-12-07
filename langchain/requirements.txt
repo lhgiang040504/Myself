@@ -2,3 +2,8 @@ bitsandbytes
 accelerate
 langchain-community
 langchain-openai
+langchain
+pypdf
+pdfminer.six
+rapidocr-onnxruntime
+requests
