@@ -2,7 +2,6 @@ const path = require('path')
 const express = require('express')
 
 const config_viewEngine = (app) => {
-    console.log(path.join('./src', 'views'))
     // Config template engine
     app.set('views', path.join('./src', 'views'))
     app.set('views engine', 'ejs')
