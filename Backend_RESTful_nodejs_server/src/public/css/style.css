@@ -35,3 +35,10 @@
     background-color: #04AA6D;
     color: white;
   }
+
+.form {
+    margin: auto;
+    width: 500px;
+    padding: 20px;
+    padding-top: 100px;
+}
