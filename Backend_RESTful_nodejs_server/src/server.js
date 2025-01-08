@@ -4,7 +4,7 @@ require('dotenv').config()
 // Import express from 'express'
 const app = express()
 const port = process.env.PORT || 8888
-const hostname = 'localhost'
+const hostname = process.env.HOST || 'localhost'
 
 // Config views engine
 const config_viewEngine = require('./config/viewEngine')
