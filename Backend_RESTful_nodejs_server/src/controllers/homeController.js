@@ -14,6 +14,10 @@ const getABC = (req, res) => {
     res.render('sample.ejs')
 }
 
+const getCreateUser = (req, res) => {
+    return res.render('create.ejs')
+}
+
 const postCreateUser = (req, res) => {
     let name = req.body.name;
     let email = req.body.email;
@@ -27,9 +31,11 @@ const postCreateUser = (req, res) => {
             if (err) {
                 console.log(err.message);
             } else {
-                console.log('success');    
+                console.log('success'); 
+                res.send("success")   
             }
         }
+
     )
 
 }
@@ -37,5 +43,6 @@ const postCreateUser = (req, res) => {
 module.exports = {
     getHomepage,
     getABC,
+    getCreateUser,
     postCreateUser,
 }
