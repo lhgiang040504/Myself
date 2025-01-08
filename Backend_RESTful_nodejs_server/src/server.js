@@ -14,6 +14,10 @@ config_viewEngine(app);
 const web = require('./routes/web')
 app.use('/', web)
 
+// Router app
+const monitor_app = require('./routes/app')
+app.use('/app', monitor_app)
+
 app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`)
 })
