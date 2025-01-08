@@ -10,6 +10,10 @@ const hostname = 'localhost'
 const config_viewEngine = require('./config/viewEngine')
 config_viewEngine(app);
 
+// Config request body
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 // Router test
 const web = require('./routes/web')
 app.use('/', web)

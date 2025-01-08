@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getHomepage, getABC} = require('../controllers/homeController')
+const {getHomepage, getABC, postCreateUser} = require('../controllers/homeController')
 
 // Route 
 // router.Method('/route', handler)
@@ -8,5 +8,7 @@ router.get('/', getHomepage)
   
 // Route
 router.get('/abc', getABC)
+
+router.post('/create-user', postCreateUser)
 
 module.exports = router
