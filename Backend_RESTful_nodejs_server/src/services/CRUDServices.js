@@ -11,6 +11,12 @@ const getAllUsers = async () => {
     }
 }
 
+const getUserbyId = async (req)=> {
+    [results, fields] = await connection.query(`SELECT * FROM Users WHERE id = ?`, [req.params.id]);
+    return results[0]
+}
+
 module.exports = {
-    getAllUsers
+    getAllUsers, 
+    getUserbyId
 }

@@ -38,8 +38,12 @@
             <td><%= user.name %></td>
             <td><%= user.city %></td>
             <td>
-                <button>edit</button>
-                <button>delete</button>
+                <a href="/edit/<%= user.id %>">
+                    <button>Edit</button>
+                </a>
+                <a href="/delete">
+                    <button>Delete</button>
+                </a>
             </td>
         </tr>
         <% }) %>
