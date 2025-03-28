@@ -75,19 +75,11 @@ class MLPBlock(layers.Layer):
     Y = tf.matmul(tf.nn.gelu(W3U), self.W4) + U  # (..., S, DC) . (..., DC, C) + (..., S, C) = (..., S, C) # skip connection
 
     return Y
-
+  
+@tf.keras.utils.register_keras_serializable(package="CustomModels")
 class MLPMixer(models.Model):
-  def __init__(self, patch_size, S, C, DS, DC, num_of_mlp_blocks, image_size, batch_size, num_classes):
-    super(MLPMixer, self).__init__()
-    
-    # Data Augmentation Layer
-    self.data_augmentation = models.Sequential([
-        layers.RandomFlip("horizontal"),   # Randomly flip images
-        layers.RandomRotation(0.1),        # Rotate up to 10%
-        layers.RandomZoom(0.1),            # Zoom in by 10%
-        layers.RandomContrast(0.1)         # Adjust contrast slightly
-    ])
-    
+  def __init__(self, patch_size, S, C, DS, DC, num_of_mlp_blocks, image_size, batch_size, num_classes, **kwargs):
+    super(MLPMixer, self).__init__(**kwargs)
     self.projection = layers.Dense(C)
     self.mlpBlocks = [MLPBlock(S, C, DS, DC) for _ in range(num_of_mlp_blocks)]
     self.patches_layer = Patches(patch_size)
@@ -110,25 +102,20 @@ class MLPMixer(models.Model):
   def call(self, images):
     # input
     # images shape: (batch_size, image_size, image_size, 3) = (32, 64, 64, 3)
-
     batch_size = images.shape[0]
 
-    augumented_images = self.data_augmentation(images)
-
+    #augumented_images = self.data_augmentation(images)
     # assert augumented_images.shape == (batch_size, self.image_size, self.image_size, 3)
 
-    # patches shape: (batch_size, S, 3 * patch_size ** 2)
-    X = self.patches_layer(augumented_images)
+    X = self.patches_layer(images)
 
     # Per-patch Fully-connected
     # X shape: (batch_size, S, C)
     X = self.projection(X)
 
-    # assert X.shape == (batch_size, self.S, self.C)
+    #assert X.shape == (batch_size, self.S, self.C)
     for block in self.mlpBlocks:
       X = block(X)
-
-    # assert X.shape == (batch_size, self.S, self.C)
 
     # out shape: (batch_size, C)
     out = self.classificationLayer(X)
@@ -137,3 +124,19 @@ class MLPMixer(models.Model):
     assert out.shape == (batch_size, self.num_classes), "Oops, wrong output shape"
 
     return out
+
+  def get_config(self):
+    # Return a config dictionary with all necessary parameters to rebuild the model.
+    config = super().get_config()
+    config.update({
+      "patch_size": self.patch_size,
+      "S": self.S,
+      "C": self.C,
+      "DS": self.DS,
+      "DC": self.DC,
+      "num_of_mlp_blocks": len(self.mlpBlocks),
+      "image_size": self.image_size,
+      "batch_size": self.batch_size,
+      "num_classes": self.num_classes,
+    })
+    return config
