@@ -13,7 +13,7 @@ if __name__ == "__main__":
     # parser.add_argument("--weight-decay", default=1e-4, type=float)
     parser.add_argument("--train-folder", default='{}/data/train'.format(home_dir), type=str)
     parser.add_argument("--valid-folder", default='{}/data/validation'.format(home_dir), type=str)
-    parser.add_argument("--model-folder", default='{}/model/mlp/'.format(home_dir), type=str)
+    parser.add_argument("--model-folder", default='{}/model/'.format(home_dir), type=str)
     parser.add_argument("--num-classes", default=2, type=int)
     parser.add_argument("--batch-size", default=32, type=int)
     parser.add_argument("--epochs", default=300, type=int)
@@ -38,8 +38,6 @@ if __name__ == "__main__":
     for i, arg in enumerate(vars(args)):
         print('{}.{}: {}'.format(i, arg, vars(args)[arg]))
     print('===========================')
-
-
 
     train_folder = args.train_folder
     valid_folder = args.valid_folder
@@ -67,16 +65,15 @@ if __name__ == "__main__":
     )
 
     # Take only the first 100 images for training and 10 images for validation
-    #train_ds = train_ds.unbatch().take(100).batch(args.batch_size)
-    #val_ds = val_ds.unbatch().take(10).batch(args.batch_size)
+    '''train_ds = train_ds.unbatch().take(100).batch(args.batch_size)
+    val_ds = val_ds.unbatch().take(10).batch(args.batch_size)'''
 
     assert args.image_size * args.image_size % ( args.patch_size * args.patch_size) == 0, 'Make sure that image-size is divisible by patch-size'
     assert args.image_channels == 3, 'Unfortunately, model accepts jpg images with 3 channels so far'
     
     S = (args.image_size * args.image_size) // (args.patch_size * args.patch_size)
-    # C = args.patch_size * args.patch_size * args.image_channels
+    #C = args.patch_size * args.patch_size * args.image_channels
 
-    
     # Initializing model
     mlpmixer = MLPMixer(args.patch_size, S, args.c, args.ds, args.dc, args.num_of_mlp_blocks, args.image_size, args.batch_size, args.num_classes)
 
@@ -89,7 +86,6 @@ if __name__ == "__main__":
     # Compile optimizer and loss function into model
     mlpmixer.compile(optimizer=adam, loss=loss_object, metrics=['acc'])
 
-
     # Do Training model
     mlpmixer.fit(train_ds, 
         epochs=args.epochs, 
@@ -97,14 +93,10 @@ if __name__ == "__main__":
         validation_data=val_ds,
     )
 
-    # Saving model
-    #mlpmixer.save(args.model_folder/'')
-    
     # Generate a timestamp for uniqueness
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     # Define model filename based on hyperparameters
     model_filename = f"mlp_mixer_ep{args.epochs}_bs{args.batch_size}_lr{args.learning_rate}_{timestamp}.keras"
-
     # Saving model with a valid filename
     mlpmixer.save(os.path.join(args.model_folder, model_filename))
 
